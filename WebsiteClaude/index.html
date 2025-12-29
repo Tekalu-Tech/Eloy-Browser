@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EloyBrowser - Privacy-Focused Web Browser</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #ffffff;
+            --color-white: #0a0a0a;
+            --color-gray-100: #1a1a1a;
+            --color-gray-200: #262626;
+            --color-gray-300: #404040;
+            --color-gray-400: #737373;
+            --color-gray-600: #a3a3a3;
+            --color-gray-800: #e5e5e5;
+            --color-blue-light: #1a2a30;
+            --color-blue-accent: #2a4550;
+            --color-blue-border: #3a5a68;
+            --color-red: #ff0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--color-white);
+            color: var(--color-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-100) 100%);
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.1));
+        }
+
+        .brand-name {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--color-black);
+            letter-spacing: -0.02em;
+        }
+
+        .wip-notice {
+            background-color: var(--color-blue-light);
+            border: 2px solid var(--color-blue-border);
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .wip-notice p {
+            font-size: 1.125rem;
+            color: var(--color-gray-800);
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 2rem;
+            background-color: var(--color-white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            color: var(--color-black);
+        }
+
+        .features-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--color-gray-100);
+            border: 2px solid var(--color-gray-200);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-gray-800);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-card.nuke-feature:hover {
+            border-color: var(--color-red);
+            box-shadow: 0 8px 24px rgba(255, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--color-black);
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: var(--color-gray-600);
+            line-height: 1.5;
+        }
+
+        /* Search Engine Section */
+        .search-section {
+            padding: 6rem 2rem;
+            background-color: var(--color-gray-100);
+        }
+
+        .search-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--color-black);
+        }
+
+        .search-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--color-white);
+            border: 2px solid var(--color-gray-300);
+            border-radius: 16px;
+            padding: 1.5rem 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-badge:hover {
+            border-color: var(--color-gray-800);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);
+        }
+
+        .search-badge img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .search-badge-text {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        /* Community Section */
+        .community-section {
+            padding: 6rem 2rem;
+            background-color: var(--color-white);
+        }
+
+        .community-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .community-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--color-black);
+        }
+
+        .community-content p {
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+            margin-bottom: 2.5rem;
+        }
+
+        .discord-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--color-black);
+            color: var(--color-white);
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-black);
+        }
+
+        .discord-button:hover {
+            background-color: var(--color-white);
+            color: var(--color-black);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
+        }
+
+        .discord-button img {
+            width: 32px;
+            height: 32px;
+            transition: filter 0.3s ease;
+        }
+
+        .discord-button:hover img {
+            filter: brightness(1.2);
+        }
+
+        /* Credits Section */
+        .credits-section {
+            padding: 6rem 2rem;
+            background-color: var(--color-gray-100);
+        }
+
+        .credits-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .credits-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--color-black);
+        }
+
+        .developers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .developer-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .developer-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--color-gray-300);
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .developer-card:hover .developer-avatar {
+            border-color: var(--color-black);
+            transform: scale(1.05);
+        }
+
+        .developer-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-black);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            background-color: var(--color-black);
+            color: var(--color-gray-300);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 2px;
+            background-color: var(--color-gray-600);
+            margin: 1.5rem auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .brand-name {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .developers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="LogoMain.png" alt="EloyBrowser Logo">
+            </div>
+            <h1 class="brand-name">EloyBrowser</h1>
+        </div>
+        
+        <div class="wip-notice">
+            <p>🚧 Work in Progress - Coming Soon</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">Security Focused</h3>
+                <p class="feature-description">Built with privacy and security at its core, protecting your data from tracking and threats.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Lightweight</h3>
+                <p class="feature-description">Fast and efficient with minimal resource usage for a smooth browsing experience.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 class="feature-title">Built-in Ad Blocker</h3>
+                <p class="feature-description">Blocks intrusive ads and trackers automatically, no extensions needed.</p>
+            </div>
+            
+            <div class="feature-card nuke-feature">
+                <div class="feature-icon">💣</div>
+                <h3 class="feature-title">Nuke Option</h3>
+                <p class="feature-description">Instantly clear all browsing data including history, cookies, and bookmarks with one click.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Engine Section -->
+    <section class="search-section">
+        <div class="search-content">
+            <h2>Privacy by Default</h2>
+            <div class="search-badge">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flogodix.com%2Flogo%2F48308.png" alt="DuckDuckGo">
+                <span class="search-badge-text">Uses DuckDuckGo by default</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section">
+        <div class="community-content">
+            <h2>Join the Community</h2>
+            <p>Connect with other alpha testers, share feedback, and be part of EloyBrowser's development journey.</p>
+            <a href="https://discord.gg/UAHWEBv7RY" class="discord-button" target="_blank" rel="noopener noreferrer">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flogodix.com%2Flogo%2F573019.png" alt="Discord">
+                Join Our Discord
+            </a>
+        </div>
+    </section>
+
+    <!-- Credits Section -->
+    <section class="credits-section">
+        <div class="credits-content">
+            <h2>Credits</h2>
+            <div class="developers-grid">
+                <div class="developer-card">
+                    <img src="https://p16-pu-sign-no.tiktokcdn-eu.com/tos-no1a-avt-0068c001-no/0fa85600f14a3bc7c181185f0419b12a~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=10399&refresh_token=0b2918d1&x-expires=1767218400&x-signature=YmAH%2BmnbIOGSaupj%2FdmmEP06Dfw%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=no1a" alt="Tekalu" class="developer-avatar">
+                    <h3 class="developer-name">Tekalu</h3>
+                </div>
+                
+                <div class="developer-card">
+                    <img src="https://cdn.discordapp.com/attachments/1351158056263614465/1455329580259741766/image.png?ex=695454ca&is=6953034a&hm=a6f1b0322458a6cff2ab88c5a1cb94aa78b994b70a8ee2fd1fdb2cf1b7473916" alt="Br34thless" class="developer-avatar">
+                    <h3 class="developer-name">Br34thless</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025-2026 EloyBrowser. All rights reserved.</p>
+            <div class="footer-divider"></div>
+            <p>Licensed under the MPL 2.0 License</p>
+        </div>
+    </footer>
+</body>
+</html>
