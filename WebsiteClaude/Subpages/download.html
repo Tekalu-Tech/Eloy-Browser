@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download EloyBrowser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-black: #ffffff;
+            --color-white: #0a0a0a;
+            --color-gray-100: #1a1a1a;
+            --color-gray-200: #262626;
+            --color-gray-300: #404040;
+            --color-gray-600: #a3a3a3;
+            --color-gray-800: #e5e5e5;
+            --color-blue-light: #1a2a30;
+            --color-blue-border: #3a5a68;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, var(--color-white), #0d0d0d);
+            min-height: 100vh;
+            color: var(--color-black);
+            padding: 40px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-container {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 4px 20px rgba(255,255,255,0.1));
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--color-black);
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--color-gray-600);
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .message-box {
+            background-color: var(--color-blue-light);
+            border: 2px solid var(--color-blue-border);
+            border-radius: 12px;
+            max-width: 760px;
+            padding: 1.25rem 2.5rem;
+            margin: 40px auto;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .message-box p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--color-black);
+        }
+
+        .message-box strong {
+            font-weight: 700;
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            background-color: var(--color-gray-100);
+            border: 2px solid var(--color-gray-200);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-gray-800);
+            box-shadow: 0 8px 24px rgba(255,255,255,0.08);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+
+        .os-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .card-header h2 {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--color-black);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .card-description {
+            color: var(--color-gray-600);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .distro-showcase {
+            margin-bottom: 20px;
+        }
+
+        .distro-icons-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            padding: 20px 0;
+        }
+
+        .showcase-icon {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .distro-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .distro-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .distro-item:hover {
+            background-color: var(--color-gray-200);
+        }
+
+        .distro-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .distro-icon {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+
+        .distro-name {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            color: var(--color-black);
+            font-size: 1.05rem;
+        }
+
+        .download-btn {
+            padding: 12px 2px;
+            border-radius: 12px;
+            background-color: var(--color-black);
+            color: var(--color-white);
+            border: 2px solid var(--color-black);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            background-color: var(--color-white);
+            color: var(--color-black);
+            box-shadow: 0 8px 24px rgba(255,255,255,0.12);
+        }
+
+        .single-download {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .single-download .download-btn {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.125rem;
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding: 40px 20px;
+            background-color: var(--color-white);
+            border-top: 2px solid var(--color-gray-200);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: var(--color-gray-600);
+            font-size: 0.95rem;
+            margin: 8px 0;
+        }
+
+        .license-info a {
+            color: var(--color-gray-800);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .license-info a:hover {
+            color: var(--color-black);
+        }
+
+        @media (max-width: 800px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .downloads-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .distro-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .download-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .message-box {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .distro-icons-row {
+                gap: 20px;
+            }
+
+            .showcase-icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-container">
+                <img src="LogoMain.png" alt="EloyBrowser Logo" class="logo">
+            </div>
+            <h1>Download EloyBrowser</h1>
+            <p class="subtitle">Choose your platform</p>
+        </div>
+
+        <div class="message-box">
+            <p><strong>EloyBrowser is coming soon!</strong> Downloads are not yet available, but you can explore our supported platforms below.</p>
+        </div>
+
+        <div class="downloads-grid">
+            <!-- Debian-based distros card -->
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Flofrev.net%2Fwp-content%2Fphotos%2F2014%2F10%2FLinux-logo.png&f=1&nofb=1&ipt=686324b4e7b3a08471cc7730382fc0ddadb87002b1da0996994eabd2bdf81fa7" alt="Linux" class="os-icon">
+                    <h2>Debian-Based</h2>
+                </div>
+                <div class="distro-showcase">
+                    <div class="distro-icons-row">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Flarge%2F2x%2Fdebian-2-logo-png-transparent.png&f=1&nofb=1&ipt=f8cc91c7eb1a50ae64b0658d4ee00b5a1b1be7ac9da3e8088a69eb2d6b3e11e8" alt="Debian" class="showcase-icon">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn3.emoji.gg%2Femojis%2F96830-linux-mint-logo.png&f=1&nofb=1&ipt=c7c77d8ce4d567114b23ace3e114a803707fdb0f0e1a1dce9e6932c8d1dac299" alt="Linux Mint" class="showcase-icon">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbrandslogos.com%2Fwp-content%2Fuploads%2Fimages%2Flarge%2Fubuntu-logo.png&f=1&nofb=1&ipt=411dfe24a4141725dbd54b7257faef8a29d0b9e51d512e67f7c974ef65d72b01" alt="Ubuntu" class="showcase-icon">
+                    </div>
+                    <p class="card-description">Supports Debian, Linux Mint, Ubuntu, and other Debian-based distributions</p>
+                </div>
+                <div class="single-download">
+                    <a href="https://example.com" class="download-btn">Get it for Deb-based</a>
+                </div>
+            </div>
+
+            <!-- Build from source card -->
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Flofrev.net%2Fwp-content%2Fphotos%2F2014%2F10%2FLinux-logo.png&f=1&nofb=1&ipt=686324b4e7b3a08471cc7730382fc0ddadb87002b1da0996994eabd2bdf81fa7" alt="Linux" class="os-icon">
+                    <h2>Build from Source</h2>
+                </div>
+                <p class="card-description">For advanced users who want to compile EloyBrowser themselves.</p>
+                <div class="single-download">
+                    <a href="https://github.com/Tekalu-Tech/Eloy-Browser" class="download-btn">Get Source Code</a>
+                </div>
+            </div>
+
+            <!-- Windows card -->
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flikesoft24.com%2Fwa-data%2Fpublic%2Fshop%2Fcategories%2F10%2F54.png&f=1&nofb=1&ipt=aff2374a0f7c39fd211e8df826a0f845b83ec0eaa6e92e9d5be1cb2a5dd731d5" alt="Windows" class="os-icon">
+                    <h2>Windows</h2>
+                </div>
+                <div class="distro-showcase">
+                    <div class="distro-icons-row">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flikesoft24.com%2Fwa-data%2Fpublic%2Fshop%2Fcategories%2F10%2F54.png&f=1&nofb=1&ipt=aff2374a0f7c39fd211e8df826a0f845b83ec0eaa6e92e9d5be1cb2a5dd731d5" alt="Windows 10" class="showcase-icon">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-wixmp-ed30a86b8c4ca887773594c2.wixmp.com%2Fi%2F91d52475-1788-4638-a5aa-d1eefcde9419%2Fdgh683s-3b410b34-33b9-4265-a776-72aeea824000.png&f=1&nofb=1&ipt=7c088740dbc60c2250289cef300994e495d9a0696ec17b56b4f01fddc575678e" alt="Windows 11" class="showcase-icon">
+                    </div>
+                    <p class="card-description">Optimized for Windows 10 and Windows 11 (64-bit)</p>
+                </div>
+                <div class="single-download">
+                    <a href="https://example.com" class="download-btn">Get it for Windows</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025-2026 EloyBrowser. All rights reserved.</p>
+            <p class="license-info">Licensed under <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank" rel="noopener noreferrer">MPL 2.0</a></p>
+        </div>
+    </footer>
+</body>
+</html>
