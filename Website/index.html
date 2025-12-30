@@ -203,6 +203,26 @@
     0 0 45px rgba(110,168,255,0.7);
 }
 
+/* Membership section styles */
+.membership-section { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+.membership-section h2 { text-align: center; color: #fff; margin-bottom: 18px; }
+.membership-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.membership-card { background: linear-gradient(180deg, rgba(110,168,255,0.04), rgba(255,255,255,0.02)); padding: 24px; border-radius: 14px; box-shadow: 0 20px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); }
+.membership-card .plan-name { font-weight: 700; color: #fff; margin: 0; }
+.plan-price { font-size: 1.6rem; font-weight: 700; color: var(--accent); margin: 8px 0 12px; }
+.plan-features { margin: 0 0 12px; padding-left: 18px; }
+.plan-cta { display: inline-block; padding: 10px 18px; border-radius: 12px; text-decoration: none; background: var(--accent); color: #fff; font-weight: 700; }
+
+@media (max-width: 800px) {
+  .membership-cards { grid-template-columns: 1fr; }
+}
+
+.site-footer {
+  text-align: center;
+  margin: 60px 0 28px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
     </style>
   </head>
 
@@ -259,6 +279,33 @@
     ❓ Can’t download the application? <span>Enter here</span>
   </a>
 </div>
+<section class="membership-section">
+  <h2>Membership Plans</h2>
+  <div class="membership-cards">
+    <div class="membership-card">
+      <h3 class="plan-name">Free</h3>
+      <div class="plan-price">$0 / mo</div>
+      <ul class="plan-features">
+        <li>Adblocker</li>
+        <li>Secure browsing</li>
+        <li>Customizable settings</li>
+      </ul>
+      <a class="plan-cta" href="#">Get Free</a>
+    </div>
+    <div class="membership-card">
+      <h3 class="plan-name">Plus</h3>
+      <div class="plan-price">$3 / mo</div>
+      <ul class="plan-features">
+        <li>Adblocker</li>
+        <li>Secure browsing</li>
+        <li>Customizable settings</li>
+        <li>Faster updates &amp; priority support</li>
+      </ul>
+      <a class="plan-cta" href="#">Get Plus</a>
+    </div>
+  </div>
+</section>
 
+<footer class="site-footer">© 2025 Eloy Browser. All rights reserved.</footer>
   </body>
 </html>
