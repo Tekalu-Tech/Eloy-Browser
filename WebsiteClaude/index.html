@@ -90,18 +90,25 @@
             letter-spacing: -0.02em;
         }
 
-        .wip-notice {
-            background-color: var(--color-blue-light);
-            border: 2px solid var(--color-blue-border);
-            padding: 1.25rem 2.5rem;
+        .download-button {
+            display: inline-block;
+            background-color: var(--color-black);
+            color: var(--color-white);
+            padding: 1.25rem 3rem;
             border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-black);
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
-        .wip-notice p {
-            font-size: 1.125rem;
-            color: var(--color-gray-800);
-            font-weight: 500;
+        .download-button:hover {
+            background-color: var(--color-white);
+            color: var(--color-black);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
         }
 
         /* Features Section */
@@ -378,9 +385,9 @@
             <h1 class="brand-name">EloyBrowser</h1>
         </div>
         
-        <div class="wip-notice">
-            <p>🚧 Work in Progress - Coming Soon</p>
-        </div>
+        <a href="./Subpages/download.html" class="download-button">
+            Download Now
+        </a>
     </section>
 
     <!-- Features Section -->
