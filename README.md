@@ -6,7 +6,7 @@
 
 **basically librewolf but even less bloat**
 
-[![License](https://img.shields.io/badge/License-MPL_2.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MPL_2.0-blue.svg)](LICENSE) [![Build](https://img.shields.io/badge/Build%20-%20Passing%20-green)]
 
 *also how did you end up here?*
 
