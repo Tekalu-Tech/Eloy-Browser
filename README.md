@@ -116,7 +116,7 @@ It's in alpha. Things might break. Don't rely on it for anything critical yet.
 
 <div align="center">
 
-**Made by Tekalu-Tech**
+**Made by Tekalu-Tech and Br34thless**
 
 Star it if you want ⭐
 
