@@ -122,6 +122,5 @@ It's in alpha. Things might break. Don't rely on it for anything critical yet.
 Star it if you want ⭐
 
 </div>
-## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Tekalu-Tech/Eloy-Browser&type=date&legend=top-left)](https://www.star-history.com/#Tekalu-Tech/Eloy-Browser&type=date&legend=top-left)
