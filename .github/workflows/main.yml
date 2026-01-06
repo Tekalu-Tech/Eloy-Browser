@@ -24,23 +24,54 @@ jobs:
     - name: Install MozillaBuild
       shell: powershell
       run: |
-        Invoke-WebRequest -Uri https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuild/3.3/MozillaBuildSetup-3.3.exe -OutFile MozillaBuildSetup.exe
+        # For reproducible builds replace "Latest" with a pinned installer filename.
+        $url = "https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe"
+        Invoke-WebRequest -Uri $url -OutFile MozillaBuildSetup.exe
+        if (-not (Test-Path MozillaBuildSetup.exe)) { throw "MozillaBuild installer download failed." }
         Start-Process MozillaBuildSetup.exe -ArgumentList '/S' -Wait
+
+    - name: Verify MozillaBuild installed
+      shell: powershell
+      run: |
+        if (-not (Test-Path "C:\mozilla-build\start-shell.bat")) { throw "MozillaBuild not found at C:\mozilla-build" }
 
     - name: Set up MSVC
       uses: ilammy/msvc-dev-cmd@v1
       with:
         arch: x64
 
-    - name: Build browser
+    - name: Build browser (mach)
       shell: cmd
       run: |
-        C:\mozilla-build\start-shell.bat bash -lc "cd $GITHUB_WORKSPACE/source/librewolf-source/windows && ./build.sh"
+        REM All commands run inside MozillaBuild bash so mach behaves like a developer machine
+        C:\mozilla-build\start-shell.bat bash -lc "
+          set -e
+
+          # Change into the actual build root inside your repo:
+          cd source/librewolf-source/librewolf-146.0.1-1
+
+          # If you need to copy branding or mozconfig from repo root, do it here, e.g.:
+          # cp -r \"$GITHUB_WORKSPACE/branding\" ./browser/branding/yourbrand || true
+          # cp \"$GITHUB_WORKSPACE/mozconfig\" .mozconfig || true
+
+          echo 'Running mach bootstrap (non-interactive). This may take a while...'
+          ./mach bootstrap --no-interactive
+
+          echo 'Starting mach build...'
+          ./mach build
+
+          echo 'Packaging...'
+          ./mach package
+        "
+
+    - name: List build outputs
+      shell: cmd
+      run: |
+        C:\mozilla-build\start-shell.bat bash -lc "ls -lah source/librewolf-source/librewolf-146.0.1-1/obj-*/dist || true"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: windows-browser-build
         path: |
-          **/*.exe
-          **/dist/**
+          source/librewolf-source/librewolf-146.0.1-1/obj-*/dist/**
