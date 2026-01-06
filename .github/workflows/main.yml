@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout source
       uses: actions/checkout@v4
+      with:
+        submodules: false
 
     - name: Install Python
       uses: actions/setup-python@v5
@@ -33,7 +35,7 @@ jobs:
     - name: Build browser
       shell: cmd
       run: |
-        C:\mozilla-build\start-shell.bat bash -lc "cd $GITHUB_WORKSPACE/windows && ./build.sh"
+        C:\mozilla-build\start-shell.bat bash -lc "cd $GITHUB_WORKSPACE/source/librewolf-source/windows && ./build.sh"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
