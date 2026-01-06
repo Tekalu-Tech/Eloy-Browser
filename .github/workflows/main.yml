@@ -25,10 +25,10 @@ jobs:
       shell: powershell
       run: |
         # For reproducible builds replace "Latest" with a pinned installer filename.
-        $url = "https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe"
-        Invoke-WebRequest -Uri $url -OutFile MozillaBuildSetup.exe
-        if (-not (Test-Path MozillaBuildSetup.exe)) { throw "MozillaBuild installer download failed." }
-        Start-Process MozillaBuildSetup.exe -ArgumentList '/S' -Wait
+        $url = "https://ftp.mozilla.org/pub/mozilla.org/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe"
+        Invoke-WebRequest -Uri $url -OutFile MozillaBuildSetup-Latest.exe
+        if (-not (Test-Path MozillaBuildSetup-Latest.exe)) { throw "MozillaBuild installer download failed." }
+        Start-Process MozillaBuildSetup-Latest.exe -ArgumentList '/S' -Wait
 
     - name: Verify MozillaBuild installed
       shell: powershell
