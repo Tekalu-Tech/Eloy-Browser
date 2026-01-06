@@ -1,0 +1,44 @@
+name: Build Windows Browser
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    timeout-minutes: 360
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install MozillaBuild
+      shell: powershell
+      run: |
+        Invoke-WebRequest -Uri https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuild/3.3/MozillaBuildSetup-3.3.exe -OutFile MozillaBuildSetup.exe
+        Start-Process MozillaBuildSetup.exe -ArgumentList '/S' -Wait
+
+    - name: Set up MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
+
+    - name: Build browser
+      shell: cmd
+      run: |
+        C:\mozilla-build\start-shell.bat bash -lc "cd $GITHUB_WORKSPACE/windows && ./build.sh"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-browser-build
+        path: |
+          **/*.exe
+          **/dist/**
