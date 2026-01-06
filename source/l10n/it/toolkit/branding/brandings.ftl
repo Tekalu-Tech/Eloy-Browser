@@ -1,7 +1,0 @@
--screenshots-brand-name = Cattura schermo
--profiler-brand-name = Profilatore
--translations-brand-name = Traduzioni
--firefox-suggest-brand-name = Suggerimenti
--firefox-home-brand-name = Pagina iniziale
--firefoxview-brand-name = Visualizzazione tabellare
--firefoxlabs-brand-name = Funzionalità sperimentali
